@@ -6,6 +6,7 @@ Grammer:
 							| empty
 	assignmentStatement : factor ARROW expr
 	expr				: factor (COMMA factor)*
+							| empty
 	factor 				: STRING
 */
 package main
@@ -27,6 +28,10 @@ type StatementListNode struct {
 	nodes []*AssignmentNode
 }
 
+func NewStatementListNode(a *AssignmentNode) *StatementListNode {
+	return &StatementListNode{[]*AssignmentNode{a}}
+}
+
 type Parser struct {
 	lexer    Lexer
 	curToken Token
@@ -41,6 +46,7 @@ func (p *Parser) eat(tt string) {
 func (p *Parser) getFactor() StringNode {
 	tt := p.curToken
 	if tt._type == STRING {
+		p.eat(tt._type)
 		return StringNode{&tt}
 	}
 	return StringNode{nil}
@@ -72,11 +78,11 @@ func (p *Parser) statement() *AssignmentNode {
 }
 
 func (p *Parser) statementList() *StatementListNode {
-	statementList := StatementListNode{}
-	statementList.nodes = []*AssignmentNode{p.statement()}
+	statementList := NewStatementListNode(p.statement())
 	for p.curToken._type == NEWLINE {
 		p.eat(NEWLINE)
 		statementList.nodes = append(statementList.nodes, p.statement())
+
 	}
-	return &statementList
+	return statementList
 }

@@ -4,20 +4,14 @@ import "fmt"
 
 func main() {
 	text := `
-	name -> aarjan
-	age -> 21
+	name -> rojesh
+	age -> 
 	friends -> robus,rajan,raman
 	`
 	lexer := Lexer{text, 0}
-	for {
-		curToken := lexer.getNextToken()
-		if curToken._type == EOF {
-			break
-		}
-		parser := Parser{lexer, curToken}
-		list := parser.statementList()
-
-		fmt.Printf("%+v\n", list.nodes)
-	}
-
+	curToken := lexer.getNextToken()
+	parser := Parser{lexer, curToken}
+	interpreter := NewInterpreter(parser)
+	interpreter.interpret()
+	fmt.Println(interpreter.data)
 }
