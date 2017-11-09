@@ -46,7 +46,6 @@ func (l *Lexer) newLine() Token {
 func (l *Lexer) variable() string {
 
 	result := []byte{}
-	// Todo: skip this regexing
 	regex := regexp.MustCompile("[0-9a-zA-z]")
 
 	for l.currentChar() != nil && regex.Match(l.currentChar()) {

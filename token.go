@@ -1,12 +1,5 @@
 package main
 
-/*
-	name 	-> aarjan
-	age  	->  21
-	friends -> robus,rajan,raman
-
-*/
-
 const ARROW = "ARROW"
 const COMMA = "COMMA"
 const STRING = "STRING"
