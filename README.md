@@ -2,13 +2,6 @@
 
 A simple compiler that lexically analyzes, parses and interpret the following text pattern into __key,value__ pairs. 
 
-__Text Pattern :__
-
-	name -> rojesh
-	age -> 32
-	friends -> robus,rajan,raman
-
-
 ### Grammer : 
 
     statementList	    :   statement
@@ -23,3 +16,15 @@ __Text Pattern :__
 						    |   empty
 
 	factor 				:   STRING
+
+
+__Text Pattern :__
+
+	name -> rojesh
+	age -> 32
+	friends -> robus,rajan,raman
+
+__Output :__
+    
+    map[name:[rojesh] age:[32] friends:[robus rajan raman]]
+    
